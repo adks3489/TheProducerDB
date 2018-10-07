@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action, computed } from 'mobx';
-import { Table, Tag, Input } from 'antd';
+import { Table, Tag, Input, Button } from 'antd';
 import { FILM_TYPES, FILM_TAG, SHOT_TYPE, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
+import ScriptInfo from './ScriptInfo';
 
 @inject('appState')
 @observer
@@ -25,23 +26,11 @@ class ArticleList extends Component {
 
   expandedRowRender = (record) => {
     return (
-    <div>
-      <img src={`images/art${record.key}.png`} style={{float:"left"}} />
-      <div style={{float:"left", marginLeft: "5px"}}>
-        {record.Tags.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
-        {record.Match.map((o,i)=><Tag color="grey" key={i}>{SHOT_TYPE[i]}:{o}</Tag>)}<br/>
-        {record.Characters.map(o=>
-          <div>
-            {o[0]}
-            {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}
-            要求：
-            {o[4]!=null ? GENDER[o[4]]: ""}
-            {o[5]!=null ? CHARA_NATION[o[5]]: ""}
-            {o[6]!=null ? CHARA_FACTION[o[6]]: ""}
-            {o[7]!=null ? CHARA_TYPE[o[7]]: ""}
-          </div>)}
+      <div>
+        <ScriptInfo data={record} />
+        <Button type="primary" onClick={()=>this.props.appState.CalcMatch(record)} style={{marginTop:"80px"}}>計算</Button>
       </div>
-    </div>)
+    );
   }
 
   render() {

@@ -37,7 +37,7 @@ let download_image = (name, url) => {
     });
 
     response.on('end', function() {
-      fs.writeFileSync(`images/${name}.png`, data.read());
+      fs.writeFileSync(`dist/images/${name}.jpg`, data.read());
     });
   }).end();
 }
@@ -120,10 +120,10 @@ let convertActor = (id) => {
 
   let imgUrl = $("body > div:nth-child(3) > div > div.media-left > img")[0].attribs.src;
   let names = $("body > div:nth-child(3) > div > div.media-body > div > h4").text().trim().split(/[ \n]+/);
-  if(names.length != 2 || names[0] == "未知")
+  if(names.length == 0 || names[0] == "未知")
     return null;
-  actor.Name = names[0];
-  actor.OrigName = names[1];
+  actor.Name = names.shift();
+  actor.OrigName = names.join(' ');
   actor.Star = parseInt($("body > div:nth-child(3) > div > div.media-body > ul > li:nth-child(1)").text().split("：")[1]);
   actor.FilmTypes = [];
   actor.FilmTags = [];
@@ -161,22 +161,23 @@ let convertActor = (id) => {
   return actor;
 }
 
-let articles = [];
-let tags = [];
-let filmtypes = [];
-//let articleNames = [];
-for(let i=1; i<=351; ++i){
-  let article = convertArticle(i);
-  //articleNames.push(article ? [article.Name, article.OrigName, article.Characters.map(o=>o[0])] : [null, null, null]);
-  if(!article){
-    continue;
-  }
-  article.key = i.toString();
-  articles.push(article);
-  // tags.push(...article.Tags);
-  // filmtypes.push(article.Type);
-}
-fs.writeFileSync('articles.json', JSON.stringify(articles));
+// let articles = [];
+// let tags = [];
+// let filmtypes = [];
+// //let articleNames = [];
+// for(let i=1; i<=351; ++i){
+//   let article = convertArticle(i);
+//   //articleNames.push(article ? [article.Name, article.OrigName, article.Characters.map(o=>o[0])] : [null, null, null]);
+//   if(!article){
+//     continue;
+//   }
+//   article.key = i.toString();
+//   articles.push(article);
+//   // tags.push(...article.Tags);
+//   // filmtypes.push(article.Type);
+// }
+// fs.writeFileSync('articles.json', JSON.stringify(articles));
+
 //fs.writeFileSync('article_names.json', JSON.stringify(articleNames));
 // // tags = Array.from(new Set(tags));
 // // filmtypes = Array.from(new Set(filmtypes));

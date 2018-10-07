@@ -1,7 +1,8 @@
 import {observable, computed, action} from 'mobx';
 
 class AppState {
-  @observable Articles = [];
+  @observable CurrentTabKey = "1";
+  @observable.shallow Articles = [];
   @observable Actors = [];
 
   @observable ArticleFilter = null;
@@ -46,6 +47,11 @@ class AppState {
   }
 
   @action
+  onTabChange = (key) => {
+    this.CurrentTabKey = key;
+  }
+
+  @action
   onArticleFilterChange = (e) => {
     this.ArticleFilter = e.target.value;
   }
@@ -84,6 +90,12 @@ class AppState {
       this.OwnedActors.delete(key);
     }
     window.localStorage.setItem("OwnedActors", JSON.stringify(Array.from(this.OwnedActors)));
+  }
+
+  @action
+  CalcMatch = (script) => {
+    this.CalcArticle = script;
+    this.CurrentTabKey = "3";
   }
 }
 
