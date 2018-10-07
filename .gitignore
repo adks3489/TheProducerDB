@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+
+.cache
+otherdata/
+dist
+
+actor_names.json
+actors.json
+article_names.json
+articles.json
+Question.txt

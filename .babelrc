@@ -1,0 +1,16 @@
+{
+  "presets": ["@babel/preset-react",
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["last 2 Chrome versions"]
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-function-bind",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true}],
+    ["import", { "libraryName": "antd", "style": "css" }]
+  ]
+}
