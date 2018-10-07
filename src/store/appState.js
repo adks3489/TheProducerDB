@@ -7,7 +7,10 @@ class AppState {
   @observable ArticleFilter = null;
   @observable ActorFilter = null;
 
+  @observable.ref CalcArticle = null;
+
   constructor(){
+    this.LoadUserData();
     this.LoadData();
   }
 
@@ -18,6 +21,7 @@ class AppState {
       }
     }).then(resp=>{
       this.Articles = resp;
+      this.CalcArticle = this.Articles[0];
     });
 
     fetch('actors.json').then(resp=>{
@@ -25,8 +29,19 @@ class AppState {
         return resp.json();
       }
     }).then(resp=>{
+      for(let actor of resp){
+        actor.Owned = this.OwnedActors.has(actor.key);
+      }
       this.Actors = resp;
     });
+  }
+
+  @action
+  LoadUserData = () => {
+    let ownedActors = window.localStorage.getItem("OwnedActors");
+    if(ownedActors){
+      this.OwnedActors = new Set(ownedActors);
+    }
   }
 
   @action
@@ -50,7 +65,24 @@ class AppState {
 
   @computed
   get ActorList(){
-    return this.Actors.slice();
+    let list = this.Actors.slice()
+    if(this.ActorFilter){
+      list = list.filter(o=>o.Name.includes(this.ActorFilter)||o.OrigName.includes(this.ActorFilter));
+    }
+    return list;
+  }
+
+  @action
+  onOwnActorChange = (key, own) => {
+    let actor = this.Actors.find(o=>o.key == key);
+    actor.Owned = own;
+    if(own){
+      this.OwnedActors.add(key);
+    }
+    else{
+      this.OwnedActors.delete(key);
+    }
+    window.localStorage.setItem("OwnedActors", JSON.stringify([...this.OwnedActors]));
   }
 }
 
