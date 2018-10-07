@@ -7,6 +7,7 @@ class AppState {
   @observable ArticleFilter = null;
   @observable ActorFilter = null;
 
+  @observable OwnedActors = new Set();
   @observable.ref CalcArticle = null;
 
   constructor(){
@@ -40,7 +41,7 @@ class AppState {
   LoadUserData = () => {
     let ownedActors = window.localStorage.getItem("OwnedActors");
     if(ownedActors){
-      this.OwnedActors = new Set(ownedActors);
+      this.OwnedActors = new Set(JSON.parse(ownedActors));
     }
   }
 
@@ -82,7 +83,7 @@ class AppState {
     else{
       this.OwnedActors.delete(key);
     }
-    window.localStorage.setItem("OwnedActors", JSON.stringify([...this.OwnedActors]));
+    window.localStorage.setItem("OwnedActors", JSON.stringify(Array.from(this.OwnedActors)));
   }
 }
 

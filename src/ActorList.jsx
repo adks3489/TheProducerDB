@@ -24,14 +24,14 @@ class ActorList extends Component {
   expandedRowRender = (record) => {
     return (
     <div>
-      <img src={`images/actor${record.key}.png`} style={{float:"left"}} />
+      <img src={`images/actor${record.key}.jpg`} style={{float:"left"}} />
       <div style={{float:"left", marginLeft: "5px"}}>
-        擅長劇本：{record.FilmTypes.map(o=><Tag color="#108ee9">{FILM_TYPES[o]}</Tag>)}{record.FilmTags.map(o=><Tag color="#108ee9">{FILM_TAG[o]}</Tag>)}<br/>
-        擅長角色：{record.Tags.map(o=><Tag color="purple">{CHARA_TAG[o]}</Tag>)}<br/>
+        擅長劇本：{record.FilmTypes.map(o=><Tag color="#108ee9" key={o}>{FILM_TYPES[o]}</Tag>)}{record.FilmTags.map(o=><Tag color="#108ee9">{FILM_TAG[o]}</Tag>)}<br/>
+        擅長角色：{record.Tags.map(o=><Tag color="purple" key={o}>{CHARA_TAG[o]}</Tag>)}<br/>
         {/* //TODO: 屬性 record.Attrs*/}
         技能
-        {record.Skills.map(o=>
-          <div>
+        {record.Skills.map((o,i)=>
+          <div key={i}>
             {o[0]} : {o[1]}
           </div>)}
       </div>
