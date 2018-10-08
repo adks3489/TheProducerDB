@@ -39,8 +39,8 @@ class ArticleList extends Component {
       <div style={{...this.props.style}}>
         <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "180px"}}/>
         <Table
-          scroll={{y: "calc(100vh - 132px)"}}
-          pagination={false}
+          scroll={{y: "calc(100vh - 170px)"}}
+          pagination={{pageSize: 10}}
           size="small"
           columns={this.Columns}
           dataSource={appState.ArticleList}
