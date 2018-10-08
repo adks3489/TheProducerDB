@@ -12,8 +12,8 @@ class ScriptInfo extends Component {
       <div style={{float:"left", marginLeft: "5px"}}>
         {data.Tags.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
         {data.Match.map((o,i)=><Tag color="grey" key={i}>{SHOT_TYPE[i]}:{o}</Tag>)}<br/>
-        {data.Characters.map(o=>
-          <div>
+        {data.Characters.map((o,i)=>
+          <div key={i}>
             {o[0]}
             {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}
             要求：

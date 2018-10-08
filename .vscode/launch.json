@@ -7,6 +7,13 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "ScriptExtra",
+      "program": "${workspaceFolder}/convert/script_extra_attr.js",
+      "cwd": "${workspaceFolder}/convert"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "ConvertName",
       "program": "${workspaceFolder}/convert/name.js"
     },
