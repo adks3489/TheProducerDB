@@ -19,7 +19,9 @@ class CalcPage extends Component {
         let idx = 0;
         for( let chara of article.Characters){
           if((chara[4] != null && actor.Gender != null && chara[4] != actor.Gender) ||
-             (chara[5] != null && actor.Nation != null && chara[5] != actor.Nation) ){
+             (chara[5] != null && actor.Nation != null && chara[5] != actor.Nation) ||
+             (chara[6] != null && actor.Faction != null && chara[6] != actor.Faction) ||
+             (chara[7] != null && actor.Type != null && chara[7] != actor.Type) ){
             ++idx;
             continue;
           }
@@ -27,8 +29,13 @@ class CalcPage extends Component {
           result.ScriptType = actor.FilmTypes.includes(article.Type);
           result.ScriptTag = article.Tags.filter(tag=>actor.FilmTags.includes(tag));
           result.CharaTag = chara[2].filter(tag=>actor.Tags.includes(tag));
-          charaResult[idx++].push({Actor: actor, Result: result});
+          let score = (result.ScriptType? 1 : 0) + result.ScriptTag.length + result.CharaTag.length;
+          charaResult[idx++].push({Actor: actor, Result: result, Score: score});
         }
+      }
+
+      for(let chara of charaResult){
+        chara.sort((a,b)=>(b.Score-a.Score));
       }
     }
 
