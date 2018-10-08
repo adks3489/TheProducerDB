@@ -43,8 +43,17 @@ class ActorList extends Component {
         filters: GENDER.map((o,i)=>({text:o, value:i})),
         onFilter: (val, r) => r.Gender == val,
         render: (txt, r, i)=>(r.Gender != -1 ? GENDER[r.Gender] : "")},
+      { title: '派別', dataIndex: 'Faction', width: 85, sorter: (a, b) => a.Faction - b.Faction,
+        filters: CHARA_FACTION.map((o,i)=>({text:o, value:i})),
+        onFilter: (val, r) => r.Faction == val,
+        render: (txt, r, i)=>(r.Faction != -1 ? CHARA_FACTION[r.Faction] : "")},
+      { title: '類型', dataIndex: 'Type', width: 85, sorter: (a, b) => a.Type - b.Type,
+        filters: CHARA_TYPE.map((o,i)=>({text:o, value:i})),
+        onFilter: (val, r) => r.Type == val,
+        render: (txt, r, i)=>(r.Type != -1 ? CHARA_TYPE[r.Type] : "")},
       //TODO: fix Switch checked not responding
-      { title: '旗下', dataIndex: 'Owned', width: 60, render: (txt, r, i)=>(<Switch size="small" defaultChecked={r.Owned} onChange={this.props.appState.onOwnActorChange.bind(null, r.key)} />),
+      { title: '旗下', dataIndex: 'Owned', width: 80, sorter: (a, b) => a.Owned - b.Owned,
+        render: (txt, r, i)=>(<Switch size="small" defaultChecked={r.Owned} onChange={this.props.appState.onOwnActorChange.bind(null, r.key)} />),
         filters: [{text:"ON", value: true}, {text:"OFF", value: false}],
         onFilter: (val, r) => r.Owned == val },
       { }
@@ -53,8 +62,8 @@ class ActorList extends Component {
       <div style={{...this.props.style}}>
         <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "180px"}}/>
         <Table
-          scroll={{y: "calc(100vh - 132px)"}}
-          pagination={false}
+          scroll={{y: "calc(100vh - 170px)"}}
+          pagination={{pageSize: 10}}
           size="small"
           columns={columns}
           dataSource={appState.ActorList}
