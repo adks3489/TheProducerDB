@@ -10,6 +10,8 @@ class ScriptInfo extends Component {
     <div>
       <img src={`images/art${data.key}.png`} style={{float:"left"}} />
       <div style={{float:"left", marginLeft: "5px"}}>
+        {Array.isArray(data.Name)? data.Name.join(', ') : data.Name}<br/>
+        <Tag color="#108ee9">{FILM_TYPES[data.Type]}</Tag>
         {data.Tags.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
         {data.Match.map((o,i)=><Tag color="grey" key={i}>{SHOT_TYPE[i]}:{o}</Tag>)}<br/>
         {data.Characters.map((o,i)=>

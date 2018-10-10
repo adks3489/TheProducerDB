@@ -12,7 +12,7 @@ class ArticleList extends Component {
     super(props);
 
     this.Columns = [
-      { title: '電影名稱', dataIndex: 'Name', width: 150 },
+      { title: '電影名稱', dataIndex: 'Name', width: 150, render: (txt, r, i)=>Array.isArray(r.Name) ? r.Name[0] : r.Name },
       { title: '原名', dataIndex: 'OrigName', width: 150 },
       { title: '星級', dataIndex: 'Star', width: 85, sorter: (a, b) => a.Star - b.Star,
         filters: [1,2,3,4,5,6].map(o=>({text:o.toString(), value:o})),

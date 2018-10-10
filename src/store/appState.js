@@ -65,7 +65,22 @@ class AppState {
   get ArticleList(){
     let list = this.Articles.slice()
     if(this.ArticleFilter){
-      list = list.filter(o=>o.Name?.includes(this.ArticleFilter)||o.OrigName?.includes(this.ArticleFilter));
+      list = list.filter(o=>{
+        if(o.OrigName?.includes(this.ArticleFilter)){
+          return true;
+        }
+        if(Array.isArray(o.Name)){
+          for(let name of o.Name){
+            if(name.includes(this.ArticleFilter)){
+              return true;
+            }
+          }
+          return false;
+        }
+        else{
+          return o.Name?.includes(this.ArticleFilter);
+        }
+      });
     }
     return list;
   }
