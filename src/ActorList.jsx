@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { Table, Tag, Input, Switch } from 'antd';
+import { Table, Tag, Input, Switch, Icon } from 'antd';
 import { FILM_TYPES, FILM_TAG, SHOT_TYPE, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
 
 @inject('appState')
@@ -60,7 +60,8 @@ class ActorList extends Component {
     ];
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "180px"}}/>
+        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "180px"}}
+          suffix={<Icon type="close-circle" onClick={appState.onActorFilterClear} />} />
         <Table
           scroll={{y: "calc(100vh - 185px)"}}
           pagination={{pageSize: 10}}

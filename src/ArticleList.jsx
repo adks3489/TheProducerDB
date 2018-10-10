@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action, computed } from 'mobx';
-import { Table, Tag, Input, Button } from 'antd';
+import { Table, Tag, Input, Button, Icon } from 'antd';
 import { FILM_TYPES, FILM_TAG, SHOT_TYPE, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
 import ScriptInfo from './ScriptInfo';
 
@@ -37,7 +37,9 @@ class ArticleList extends Component {
     let {appState} = this.props;
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "180px"}}/>
+        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "180px"}}
+          suffix={<Icon type="close-circle" onClick={appState.onArticleFilterClear} />}
+        />
         <Table
           scroll={{y: "calc(100vh - 170px)"}}
           pagination={{pageSize: 10}}

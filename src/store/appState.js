@@ -57,8 +57,18 @@ class AppState {
   }
 
   @action
+  onArticleFilterClear = () => {
+    this.ArticleFilter = "";
+  }
+
+  @action
   onActorFilterChange = (e) => {
     this.ActorFilter = e.target.value;
+  }
+
+  @action
+  onActorFilterClear = () => {
+    this.ActorFilter = "";
   }
 
   @computed
