@@ -48,15 +48,15 @@ class CalcPage extends Component {
             <div>
               <Row>
                 <img src={`images/art${article.key}.png`} style={{float:"left"}} />
-                <div style={{float:"left", marginLeft: "5px"}}>
+
                   <Tag color="#108ee9">{FILM_TYPES[article.Type]}</Tag>
                   {article.Tags.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
                   {article.Match.map((o,i)=><Tag color="grey" key={i}>{SHOT_TYPE[i]}:{o}</Tag>)}<br/>
-                </div>
+
               </Row>
               <Row gutter={5}>
                 {article.Characters.map((o,i)=>(
-                <Col key={i} span={6} style={{border:"solid 1px"}}>
+                <Col key={i} span={6} xs={12} md={8} lg={6} style={{border:"solid 1px"}}>
                   <b>{o[0]} </b>{o[1]!=null ? POSITION[o[1]]: ""}<br/>
                   {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}<br/>
                   要求：
