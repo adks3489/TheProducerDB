@@ -56,7 +56,7 @@ class CalcPage extends Component {
               </Row>
               <Row gutter={5}>
                 {article.Characters.map((o,i)=>(
-                <Col key={i} span={4} style={{border:"solid 1px"}}>
+                <Col key={i} span={6} style={{border:"solid 1px"}}>
                   {o[0]}<br/>
                   {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}<br/>
                   要求：
@@ -66,12 +66,12 @@ class CalcPage extends Component {
                   {o[7]!=null ? CHARA_TYPE[o[7]]: ""}
                   {charaResult[i].map((result, i)=>(
                     <div key={i} style={{marginTop:"10px", display:"flex", flexDirection:"row", alignItems:"center"}}>
-                      <img src={`images/actor${result.Actor.key}.jpg`} style={{float:"left", height:"75px"}} />
-                      <div style={{flex:"1", float:"left", marginLeft: "5px"}}>
+                      <div style={{flex:"1"}}>
                         <b>{result.Actor.Name}</b>
+                        <img src={`images/actor${result.Actor.key}.jpg`} style={{float:"left", height:"75px"}} />
                         <Badge style={{ backgroundColor: '#52c41a' }} count={result.Result.ScriptTag.length+(result.Result.ScriptType?1:0)}/>
                         <Badge style={{ backgroundColor: '#52c41a' }} count={result.Result.CharaTag.length}/><br/>
-                        片型: {result.Result.ScriptType ? "符合" : "不符合"}<br/>
+                        片型: {result.Result.ScriptType ? "符合" : "不符"}<br/>
                         劇本: {result.Result.ScriptTag.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
                         角色: {result.Result.CharaTag.map(o=><Tag color="purple" key={o}>{CHARA_TAG[o]}</Tag>)}
                       </div>

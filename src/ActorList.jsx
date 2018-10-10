@@ -62,7 +62,7 @@ class ActorList extends Component {
       <div style={{...this.props.style}}>
         <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "180px"}}/>
         <Table
-          scroll={{y: "calc(100vh - 170px)"}}
+          scroll={{y: "calc(100vh - 185px)"}}
           pagination={{pageSize: 10}}
           size="small"
           columns={columns}
