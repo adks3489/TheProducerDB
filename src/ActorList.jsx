@@ -30,7 +30,7 @@ class ActorList extends Component {
   render() {
     let {appState} = this.props;
     let columns = [
-      { title: '演員名稱', dataIndex: 'Name', width: 150 },
+      { title: '名稱', dataIndex: 'Name', width: 150 },
       { title: '原名', dataIndex: 'OrigName', width: 150 },
       { title: '星級', dataIndex: 'Star', width: 85, sorter: (a, b) => a.Star - b.Star,
         filters: [1,2,3,4,5,6].map(o=>({text:o.toString(), value:o})),
@@ -60,11 +60,11 @@ class ActorList extends Component {
     ];
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "180px"}}
+        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "150px", float: "left", zIndex: "1"}}
           suffix={<Icon type="close-circle" onClick={appState.onActorFilterClear} />} />
         <Table
           scroll={{y: "calc(100vh - 185px)"}}
-          pagination={{pageSize: 10}}
+          pagination={{pageSize: 10, position: "top"}}
           size="small"
           columns={columns}
           dataSource={appState.ActorList}

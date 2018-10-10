@@ -37,12 +37,12 @@ class ArticleList extends Component {
     let {appState} = this.props;
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "180px"}}
+        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "150px", float: "left", zIndex: "1"}}
           suffix={<Icon type="close-circle" onClick={appState.onArticleFilterClear} />}
         />
         <Table
           scroll={{y: "calc(100vh - 170px)"}}
-          pagination={{pageSize: 10}}
+          pagination={{pageSize: 10, position:"top"}}
           size="small"
           columns={this.Columns}
           dataSource={appState.ArticleList}
