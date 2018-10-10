@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Select, Tag, Row, Col, Badge } from 'antd';
-import { FILM_TYPES, FILM_TAG, SHOT_TYPE, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
+import { FILM_TYPES, FILM_TAG, SHOT_TYPE, POSITION, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
 
 @inject('appState')
 @observer
@@ -57,7 +57,7 @@ class CalcPage extends Component {
               <Row gutter={5}>
                 {article.Characters.map((o,i)=>(
                 <Col key={i} span={6} style={{border:"solid 1px"}}>
-                  {o[0]}<br/>
+                  <b>{o[0]} </b>{o[1]!=null ? POSITION[o[1]]: ""}<br/>
                   {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}<br/>
                   要求：
                   {o[4]!=null ? GENDER[o[4]]: ""}
@@ -72,8 +72,8 @@ class CalcPage extends Component {
                         <Badge style={{ backgroundColor: '#52c41a' }} count={result.Result.ScriptTag.length+(result.Result.ScriptType?1:0)}/>
                         <Badge style={{ backgroundColor: '#52c41a' }} count={result.Result.CharaTag.length}/><br/>
                         片型: {result.Result.ScriptType ? "符合" : "不符"}<br/>
-                        劇本: {result.Result.ScriptTag.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
-                        角色: {result.Result.CharaTag.map(o=><Tag color="purple" key={o}>{CHARA_TAG[o]}</Tag>)}
+                        {result.Result.ScriptTag.map(o=><Tag color="#108ee9" key={o}>{FILM_TAG[o]}</Tag>)}<br/>
+                        {result.Result.CharaTag.map(o=><Tag color="purple" key={o}>{CHARA_TAG[o]}</Tag>)}
                       </div>
                     </div>
                   ))}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tag, Input, Button } from 'antd';
-import { FILM_TYPES, FILM_TAG, SHOT_TYPE, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
+import { FILM_TYPES, FILM_TAG, SHOT_TYPE, POSITION, CHARA_TAG, CHARA_ATTR, GENDER, CHARA_NATION, CHARA_FACTION, CHARA_TYPE } from './Types';
 
 
 class ScriptInfo extends Component {
@@ -14,7 +14,7 @@ class ScriptInfo extends Component {
         {data.Match.map((o,i)=><Tag color="grey" key={i}>{SHOT_TYPE[i]}:{o}</Tag>)}<br/>
         {data.Characters.map((o,i)=>
           <div key={i}>
-            {o[0]}
+            <b>{o[0]} </b>{o[1]!=null ? POSITION[o[1]]: ""}
             {o[2]?.map(tag=><Tag color="purple" key={tag}>{CHARA_TAG[tag]}</Tag>)}
             要求：
             {o[4]!=null ? GENDER[o[4]]: ""}
