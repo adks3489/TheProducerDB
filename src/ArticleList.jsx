@@ -33,12 +33,17 @@ class ArticleList extends Component {
     );
   }
 
+  onFilterClear = (e) => {
+    this.props.appState.onArticleFilterClear(e);
+    this.Filter.focus();
+  }
+
   render() {
     let {appState} = this.props;
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "150px", float: "left", zIndex: "1"}}
-          suffix={<Icon type="close-circle" onClick={appState.onArticleFilterClear} />}
+        <Input value={appState.ArticleFilter} onChange={appState.onArticleFilterChange} placeholder="過濾" style={{width: "140px", float: "left", zIndex: "1"}}
+          ref={o=>{this.Filter=o}} suffix={<Icon type="close-circle" onClick={this.onFilterClear} />}
         />
         <Table
           scroll={{y: "calc(100vh - 170px)"}}

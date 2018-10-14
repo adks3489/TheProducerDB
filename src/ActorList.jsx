@@ -27,6 +27,11 @@ class ActorList extends Component {
     </div>)
   }
 
+  onFilterClear = (e) => {
+    this.props.appState.onActorFilterClear(e);
+    this.Filter.focus();
+  }
+
   render() {
     let {appState} = this.props;
     let columns = [
@@ -60,8 +65,8 @@ class ActorList extends Component {
     ];
     return (
       <div style={{...this.props.style}}>
-        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "150px", float: "left", zIndex: "1"}}
-          suffix={<Icon type="close-circle" onClick={appState.onActorFilterClear} />} />
+        <Input value={appState.ActorFilter} onChange={appState.onActorFilterChange} placeholder="過濾" style={{width: "140px", float: "left", zIndex: "1"}}
+          ref={o=>{this.Filter=o}} suffix={<Icon type="close-circle" onClick={this.onFilterClear} />} />
         <Table
           scroll={{y: "calc(100vh - 185px)"}}
           pagination={{pageSize: 10, position: "top"}}
